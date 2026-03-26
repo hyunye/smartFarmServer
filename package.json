@@ -1,7 +1,14 @@
 {
+  "type": "module",
+  "scripts": {
+    "start": "tsgo src/index.ts",
+    "build": "tsgo build src/index.ts"
+  },
   "dependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
     "@typescript/native-preview": "^7.0.0-dev.20260326.1",
+    "express": "^5.2.1",
     "typescript": "^6.0.2"
   }
 }
