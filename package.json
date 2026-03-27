@@ -1,5 +1,22 @@
 {
+  "name": "smartfarmserver",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "cli"
+  ],
+  "homepage": "https://github.com/hyunye/smartFarmServer#readme",
+  "bugs": {
+    "url": "https://github.com/hyunye/smartFarmServer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyunye/smartFarmServer.git"
+  },
+  "license": "ISC",
+  "author": "hyunye",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "start": "tsgo src/index.ts",
     "build": "tsgo build src/index.ts"
@@ -10,5 +27,6 @@
     "@typescript/native-preview": "^7.0.0-dev.20260326.1",
     "express": "^5.2.1",
     "typescript": "^6.0.2"
-  }
+  },
+  "devDependencies": {}
 }
