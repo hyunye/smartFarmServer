@@ -1,6 +1,5 @@
 import express from 'express';
-import https from 'https';
-import fs from 'fs';
+import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -9,28 +8,23 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const DEFAULT_PORT = 443;
+// HTTP 개발용 기본 포트를 3000으로 설정합니다.
+const DEFAULT_PORT = 3000;
 const PORT = Number(process.env.PORT) || Number(process.argv[2]) || DEFAULT_PORT;
 
-const certsDir = path.join(__dirname, '..', 'certs');
-const keyPath = path.join(certsDir, 'key.pem');
-const certPath = path.join(certsDir, 'cert.pem');
-
-if (!fs.existsSync(keyPath) || !fs.existsSync(certPath)) {
-  console.error('Error: SSL certificate (cert.pem) or key (key.pem) not found in ./certs folder.');
-  process.exit(1);
-}
-
-const httpsOptions = {
-  key: fs.readFileSync(keyPath),
-  cert: fs.readFileSync(certPath)
-};
-
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello from HTTPS Express ESM Server!', port: PORT });
+  res.json({ 
+    message: 'Hello from HTTP Express Server (Optimized for ngrok)!', 
+    port: PORT,
+    note: 'Use ngrok for secure HTTPS access: npx ngrok http ' + PORT
+  });
 });
 
-https.createServer(httpsOptions, app).listen(PORT, () => {
-  console.log(`HTTPS Server is running on port ${PORT}`);
-  console.log(`Access at: https://localhost:${PORT}`);
+// HTTPS 대신 HTTP 서버를 생성합니다.
+http.createServer(app).listen(PORT, () => {
+  console.log(`HTTP Server is running locally on port ${PORT}`);
+  console.log(`Local Access: http://localhost:${PORT}`);
+  console.log(`\n--- ngrok 실행 방법 ---`);
+  console.log(`터미널에서 다음 명령어를 입력하세요:`);
+  console.log(`npx ngrok http ${PORT}`);
 });
